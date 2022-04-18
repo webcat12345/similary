@@ -17,7 +17,7 @@
           <div *ngIf="result">
             <p>Message: {{ result.Message}}</p>
             <p>Overall: {{ result.Overal }}</p>
-            <p>Result: {{ result.Result }}</p>
+            <p>Result: {{ result.Result | number }}</p>
           </div>
         </div>
       </div>
