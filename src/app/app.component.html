@@ -1,3 +1,14 @@
-<router-outlet></router-outlet>
+<app-header></app-header>
+<section class="bg-slate pt-50">
+  <div class="container py-60">
 
-<h1 class="text-3xl font-bold underline">Hello world!</h1>
+    <div class="grid grid-cols-2 gap-x-80">
+      <app-file-uploader></app-file-uploader>
+      <app-file-uploader [type]="FileType.Video"></app-file-uploader>
+    </div>
+
+    <div class="flex justify-center mt-70">
+      <button class="btn">Compare</button>
+    </div>
+  </div>
+</section>
