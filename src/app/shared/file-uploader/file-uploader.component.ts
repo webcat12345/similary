@@ -20,6 +20,7 @@ export class FileUploaderComponent implements OnInit, OnDestroy {
 
   FileType = FileType;
   base64Output: string | undefined;
+  rawFile: File | undefined;
   videoFormat = '';
 
   private unsubscribeAll: Subject<any> = new Subject();
@@ -38,7 +39,7 @@ export class FileUploaderComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribeAll))
       .subscribe((base64: string | undefined) => {
         this.base64Output = base64;
-        this.uploaded.emit(this.base64Output);
+        this.uploaded.emit(this.rawFile);
       });
   }
 
@@ -46,6 +47,7 @@ export class FileUploaderComponent implements OnInit, OnDestroy {
     if (this.type === FileType.Video) {
       this.videoFormat = file.type;
     }
+    this.rawFile = file;
     const result = new ReplaySubject<string>(1);
     const reader = new FileReader();
     reader.readAsBinaryString(file);

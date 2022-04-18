@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api: 'https://62e2-45-76-204-99.jp.ngrok.io/getFRResult',
+  api: 'https://62e2-45-76-204-99.jp.ngrok.io',
 };
 
 /*
