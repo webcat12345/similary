@@ -2,13 +2,26 @@
 <section class="bg-slate pt-50">
   <div class="container py-60">
 
-    <div class="grid grid-cols-2 gap-x-80">
-      <app-file-uploader></app-file-uploader>
-      <app-file-uploader [type]="FileType.Video"></app-file-uploader>
+    <div class="grid grid-cols-4 gap-x-80">
+      <div class="col-span-3 grid grid-cols-2 gap-x-80">
+        <app-file-uploader (uploaded)="cardUploaded($event)"></app-file-uploader>
+        <app-file-uploader [type]="FileType.Video" (uploaded)="faceUploaded($event)"></app-file-uploader>
+      </div>
+      <div class="border px-15">
+        <div class="flex justify-center my-30">
+          <button class="btn" (click)="compare()" [disabled]="isLoading">{{isLoading ? 'Comparing...' : 'Compare'}}</button>
+        </div>
+        <div>
+          <p class="text-center font-medium mb-10">Result</p>
+          <p *ngIf="error" class="text-center">{{ error }}</p>
+          <div *ngIf="result">
+            <p>Message: {{ result.Message}}</p>
+            <p>Overall: {{ result.Overal }}</p>
+            <p>Result: {{ result.Result }}</p>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="flex justify-center mt-70">
-      <button class="btn">Compare</button>
-    </div>
   </div>
 </section>

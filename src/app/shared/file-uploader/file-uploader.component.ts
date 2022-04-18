@@ -1,4 +1,11 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Observable, ReplaySubject, Subject, takeUntil } from 'rxjs';
 import { FileType } from '../../core/models/file';
 
@@ -9,6 +16,7 @@ import { FileType } from '../../core/models/file';
 })
 export class FileUploaderComponent implements OnInit, OnDestroy {
   @Input() type: FileType = FileType.Image;
+  @Output() uploaded: EventEmitter<any> = new EventEmitter<any>();
 
   FileType = FileType;
   base64Output: string | undefined;
@@ -30,6 +38,7 @@ export class FileUploaderComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribeAll))
       .subscribe((base64: string | undefined) => {
         this.base64Output = base64;
+        this.uploaded.emit(this.base64Output);
       });
   }
 
